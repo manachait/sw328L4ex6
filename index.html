@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+<script type = "text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type = "text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+<script>
+function init(){
+    document.addEventListener("deviceready", onDeviceReady, false);
+}
+function onDeviceReady(){
+    $("#checkdevice").html("Hello Gallery...");
+}
+function getPhoto(){
+    var options = {destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.PHOTOLIBRARY};
+	navigator.camera.getPicture(onSuccess, onFail, options);
+}
+function onSuccess(imageData){
+    var myPhoto = document.getElementById("myPhoto");
+	myPhoto.style.display = "block";
+    myPhoto.src = imageData;
+	$("#result").html("Finished !!!");
+}
+function onFail(message){
+	$("#result").html("Failed !!! Reason: " + message);
+}
+</script>
+</head>
+<body onload="init()">
+<h1 id="checkdevice">Wait...</h1>
+<div id="result"></div>
+<img style="display:none; width: 50%; height:50%" id="myPhoto" src=""/>
+<a href="JavaScript: getPhoto();" CLASS="ui-btn ui-shadow">Get Photo from Gallery</a>
+<script type="text/javascript" src="cordova.js"></script>
+</body>
+</html>
